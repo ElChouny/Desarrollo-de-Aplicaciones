@@ -1,57 +1,89 @@
-import { StyleSheet, Text, View } from 'react-native';
+import { StatusBar } from 'expo-status-bar'
+import { useState } from 'react'
+import {Pressable, TextInput, View,Text,StyleSheet} from 'react-native'
 
-const App =() => {
-  
+const App = () => {
+
+  const [newItem,setNewItem] = useState("")
+  const [items,setItems] = useState(["Coca cola", "Pepsi"])
+
+  const addItem = () => {
+    setItems([...items,newItem])
+    setNewItem("")
+  }
+
+
   return (
     <View style={styles.container}>
-      <View style={styles.contenedorPartes}>
-        <View style={styles.partOne}>
-          <Text style={styles.text}>Hola Coder!</Text>
+      <View style={styles.containerInput}>
+        <TextInput 
+          placeholderTextColor="white"
+          value={newItem}
+          onChangeText={(text) => setNewItem(text)} 
+          style={styles.input} 
+          placeholder='Ingrese item'
+        />
+        <Pressable onPress={addItem} style={styles.button}>
+          <Text style={styles.textButton}>+</Text>
+        </Pressable>
+      </View>
+      <View style={styles.containerCards}>
+        {items.map((item,index) => 
+        <View style={styles.card} key={index}>
+          <Text style={styles.textCard}>{item}</Text>
         </View>
-        <View style={styles.partTwo}>
-          <Text style={styles.text}>Como estan?</Text>
-        </View>
+      )}
       </View>
     </View>
-  );
+  )
 }
-export default App 
+
+export default App
 
 const styles = StyleSheet.create({
-  container: {
-    backgroundColor: 'red',
-    width: '100%',
-    flex: 1,
-    justifyContent: 'center',
+  container:{
+    marginTop:24,
+    flex:1
   },
-  text: {
-    fontSize: 24,
-    color: 'white',
-    fontWeight: 'bold',
+  containerInput:{
+    backgroundColor:"#F4012D",
+    margin:10,
+    padding: 10,
+    borderRadius:8,
+    flexDirection:"row",
+    alignItems:"center"
   },
-  contenedorPartes: {
-    backgroundColor: 'yellow',
-    width: '80%',
-    marginHorizontal: "10%",
-    flexDirection: 'row',
-    justifyContent: 'space-around',
+  input:{
+    borderBottomColor:"white",
+    borderBottomWidth:2,
+    flex:1,
+    margin:10,
+    color:"white"
   },
-  partOne: {
-    backgroundColor: 'blue',
-    //width: '40%',
-    padding: 20,
-    margin: 10,
-    justifyContent: 'center',
-    alignItems: 'center',
-    flex: 1,
+  button:{
+    backgroundColor:"white",
+    width:40,
+    height:40,
+    padding:10,
+    margin:5,
+    borderRadius:3,
+    alignItems:"center"
   },
-  partTwo: {
-    backgroundColor: 'green',
-    //width: '40%',
-    padding: 20,
-    margin: 10,
-    justifyContent: 'center',
-    alignItems: 'center',
-    flex: 1,
+  textButton:{
+    color:"red",
+    fontWeight:"bold"
   },
-});
+  card:{
+    width:"80%",
+    backgroundColor:"#F4012D",
+    marginHorizontal:"10%",
+    marginVertical:20,
+    padding:15,
+    borderRadius:6,
+    alignItems:"center"
+  },
+  textCard:{
+    color:"white"
+  }
+  
+})
