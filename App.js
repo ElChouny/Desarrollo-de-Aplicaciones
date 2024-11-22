@@ -1,36 +1,54 @@
 import { StatusBar } from 'expo-status-bar'
 import { useState } from 'react'
 import {Pressable, TextInput, View,Text,StyleSheet} from 'react-native'
+import uuid from 'react-native-uuid'
 
 const App = () => {
 
-  const [newItem,setNewItem] = useState("")
-  const [items,setItems] = useState(["Coca cola", "Pepsi"])
+  const [newValueItem,setNewValueItem] = useState("")
+  const [errorInput,setErrorInput] = useState("")
+  const [items,setItems] = useState([])
 
   const addItem = () => {
-    setItems([...items,newItem])
-    setNewItem("")
+    if(newValueItem == ""){
+      setErrorInput("Campo requerido")
+      return
+    }
+    const item = {
+      id:uuid.v4(),
+      value:newValueItem
+    }
+    setItems(currentItems => [...currentItems,item])
+    setNewValueItem("")
+  }
+
+  const handlerOnChangeItem = (text) => {
+    setErrorInput("")
+    setNewValueItem(text)
   }
 
 
   return (
     <View style={styles.container}>
-      <View style={styles.containerInput}>
-        <TextInput 
-          placeholderTextColor="white"
-          value={newItem}
-          onChangeText={(text) => setNewItem(text)} 
-          style={styles.input} 
-          placeholder='Ingrese item'
-        />
+      <View style={styles.containerAdd}>
+        <View style={styles.containerInput}>
+          <TextInput 
+            placeholderTextColor="white"
+            value={newValueItem}
+            onChangeText={handlerOnChangeItem} 
+            style={styles.input} 
+            placeholder='Ingrese item'
+          />
+          {<Text style={styles.error}>{errorInput ? errorInput : ""}</Text>}
+        </View>
         <Pressable onPress={addItem} style={styles.button}>
           <Text style={styles.textButton}>+</Text>
         </Pressable>
       </View>
       <View style={styles.containerCards}>
-        {items.map((item,index) => 
-        <View style={styles.card} key={index}>
-          <Text style={styles.textCard}>{item}</Text>
+        {items.map((item) => 
+        <View style={styles.card} key={item.id}>
+          <Text style={styles.textCard}>{item.value}</Text>
         </View>
       )}
       </View>
@@ -42,10 +60,10 @@ export default App
 
 const styles = StyleSheet.create({
   container:{
-    marginTop:24,
+    marginTop:30,
     flex:1
   },
-  containerInput:{
+  containerAdd:{
     backgroundColor:"#F4012D",
     margin:10,
     padding: 10,
@@ -53,10 +71,12 @@ const styles = StyleSheet.create({
     flexDirection:"row",
     alignItems:"center"
   },
+  containerInput:{
+    flex:1
+  },
   input:{
     borderBottomColor:"white",
     borderBottomWidth:2,
-    flex:1,
     margin:10,
     color:"white"
   },
@@ -83,6 +103,9 @@ const styles = StyleSheet.create({
     alignItems:"center"
   },
   textCard:{
+    color:"white"
+  },
+  error:{
     color:"white"
   }
   
