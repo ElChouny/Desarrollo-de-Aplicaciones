@@ -3,9 +3,19 @@ import { StyleSheet, Text, View } from 'react-native'
 import Home from './src/screens/Home'
 import ProductsByCategory from './src/screens/ProductsByCategory'
 import ProductDetail from './src/screens/ProductDetail'
-import  Colors  from './src/globals/Colors'
+import Colors from './src/globals/Colors'
+import { useFonts } from 'expo-font'
 
 export default function App() {
+
+
+  const [fontsLoaded] = useFonts({
+
+  })
+
+  if (!fontsLoaded) {
+    return null
+  }
 
   const product = {
     id: 0,
@@ -24,13 +34,13 @@ export default function App() {
       "https://i.dummyjson.com/data/products/100/3.jpg",
       "https://i.dummyjson.com/data/products/100/thumbnail.jpg"
     ]
-}
+  }
 
   return (
-    <>
-      <Home/>
-      <StatusBar style="light" backgroundColor={Colors.primary}/>
-    </>
+    <View>
+      <Home />
+      <StatusBar style="light" backgroundColor={Colors.primary} />
+    </View>
   )
 }
 

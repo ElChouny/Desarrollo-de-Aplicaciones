@@ -27,6 +27,6 @@ const styles = StyleSheet.create({
         borderRadius: 7
     },
     text: {
-        color: Colors.lightGray,
+        color: Colors.fourth,
     }
 })
