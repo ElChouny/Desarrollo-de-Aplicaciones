@@ -1,54 +1,41 @@
-import { StatusBar } from 'expo-status-bar'
-import { StyleSheet, Text, View } from 'react-native'
+import {StatusBar, StyleSheet, Text, useWindowDimensions, SafeAreaView,Platform } from 'react-native'
 import Home from './src/screens/Home'
 import ProductsByCategory from './src/screens/ProductsByCategory'
-import ProductDetail from './src/screens/ProductDetail'
+import ProductsDetail from './src/screens/ProductsDetail'
 import Colors from './src/globals/Colors'
 import { useFonts } from 'expo-font'
+import Fonts from './src/globals/Fonts'
+import { useEffect, useState } from 'react'
 
 export default function App() {
 
+  const [fontsLoaded] = useFonts(Fonts)
+  const [portrait,setPortrait] = useState(false)
+  const {width,height} = useWindowDimensions()
 
-  const [fontsLoaded] = useFonts({
+  useEffect(()=>{
+    if(width > height){
+      setPortrait(false)
+    } else{
+      setPortrait(true)
+    }
+  },[width,height])
 
-  })
-
-  if (!fontsLoaded) {
+  if(!fontsLoaded){
     return null
   }
-
-  const product = {
-    id: 0,
-    title: "Crystal chandelier maria theresa for 12 light",
-    description: "Crystal chandelier maria theresa for 12 light",
-    price: 47,
-    discountPercentage: 16,
-    rating: 4.74,
-    stock: 133,
-    brand: "YIOSI",
-    category: "lighting",
-    thumbnail: "https://i.dummyjson.com/data/products/100/thumbnail.jpg",
-    images: [
-      "https://i.dummyjson.com/data/products/100/1.jpg",
-      "https://i.dummyjson.com/data/products/100/2.jpg",
-      "https://i.dummyjson.com/data/products/100/3.jpg",
-      "https://i.dummyjson.com/data/products/100/thumbnail.jpg"
-    ]
-  }
-
+  
   return (
-    <View>
-      <Home />
-      <StatusBar style="light" backgroundColor={Colors.primary} />
-    </View>
+    <SafeAreaView style={styles.container}>
+            <ProductsByCategory category="Laptops"/>
+            <StatusBar style="light" backgroundColor={Colors.Celeste}/>
+    </SafeAreaView>
   )
 }
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    backgroundColor: Colors.lightGray,
-    alignItems: 'center',
-    justifyContent: 'center',
+    flex:1,
+    paddingTop:Platform.OS === "android" ? StatusBar.currentHeight : 0
   },
 })

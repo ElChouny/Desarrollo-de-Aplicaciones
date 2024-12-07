@@ -37,14 +37,14 @@ const Search = ({ onChangeKeyword }) => {
                     onChangeText={(text) => setTextInput(text)}
                     placeholderTextColor={Colors.lightGray}
                     placeholder='Buscar' />
-                <Text style={styles.error}>{error ? error : ""}</Text>
+                <Pressable style={styles.button} onPress={search}>
+                    <FontAwesome name="search" size={30} color="black" />
+                </Pressable>
+                <Pressable style={styles.button} onPress={removeSearch}>
+                    <MaterialIcons name="cancel" size={30} color="black" />
+                </Pressable>
             </View>
-            <Pressable style={styles.button} onPress={search}>
-                <FontAwesome name="search" size={30} color="black" />
-            </Pressable>
-            <Pressable style={styles.button} onPress={removeSearch}>
-                <MaterialIcons name="cancel" size={30} color="black" />
-            </Pressable>
+            <Text style={styles.error}>{error ? error : ""}</Text>
         </View>
     )
 }
@@ -53,20 +53,21 @@ export default Search
 
 const styles = StyleSheet.create({
     container: {
+        paddingHorizontal: 10,
+        paddingTop: 15
+    },
+    containerInput: {
         flexDirection: "row",
-        padding: 10,
         alignItems: "center",
         justifyContent: "center"
     },
-    containerInput: {
-        flex: 1,
-    },
     input: {
-        backgroundColor: Colors.third,
+        backgroundColor: Colors.Azul,
+        padding: 5,
         paddingLeft: 10,
         borderRadius: 4,
         color: Colors.lightGray,
-        height: 25,
+        flex: 1
     },
     button: {
         margin: 5

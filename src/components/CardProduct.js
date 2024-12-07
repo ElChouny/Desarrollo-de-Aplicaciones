@@ -1,18 +1,20 @@
-import { Image, Pressable, StyleSheet, Text, View } from 'react-native'
+import { Image, Pressable, StyleSheet, Text, useWindowDimensions, View } from 'react-native'
 import React from 'react'
 import Colors from '../globals/Colors'
 
 const CardProduct = ({ product }) => {
 
     const { title, price, stock, thumbnail } = product
+    const { width, height } = useWindowDimensions()
+
     return (
         <Pressable style={styles.container}>
             <Image style={styles.image} source={{ uri: thumbnail }} resizeMode='cover' />
             <View>
                 <Text style={styles.title}>{title}</Text>
                 <View style={styles.containerText}>
-                    <Text style={styles.text}>Precio: $ {price}  ARG</Text>
-                    <Text style={styles.text}>Stock: {stock}</Text>
+                    <Text style={width > 400 ? styles.text : styles.textMin}>Precio: $ {price} USD </Text>
+                    <Text style={width > 400 ? styles.text : styles.textMin}>Stock: {stock}</Text>
                 </View>
             </View>
         </Pressable>
@@ -23,7 +25,7 @@ export default CardProduct
 
 const styles = StyleSheet.create({
     container: {
-        backgroundColor: Colors.primary,
+        backgroundColor: Colors.Celeste,
         margin: 10,
         borderRadius: 5,
         padding: 10,
@@ -32,11 +34,16 @@ const styles = StyleSheet.create({
         alignItems: "center"
     },
     image: {
-        width: 50,
-        height: 50
+        minWidth: 50,
+        minHeight: 50,
+        maxWidth: 90,
+        maxHeight: 90,
+        width: "15vw",
+        height: "15vw",
+        backgroundColor: "red"
     },
     title: {
-        color: Colors.fourth,
+        color: "black",
         fontSize: 14,
         padding: 5
     },
@@ -46,7 +53,11 @@ const styles = StyleSheet.create({
         padding: 10
     },
     text: {
-        color: Colors.fourth,
+        color: "black",
+        fontSize: 16
+    },
+    textMin: {
+        color: "black",
         fontSize: 12
     }
 })

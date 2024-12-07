@@ -1,8 +1,6 @@
-import { StyleSheet, Text, View } from 'react-native'
-import React from 'react'
+import { StyleSheet } from 'react-native'
 import ShadowCard from './wrapper/ShadowCard'
-import Colors from '../globals/Colors';
-
+import Colors from '../globals/Colors'
 import TextPrimary from './TextPrimary'
 
 const CardItemCategory = ({ item }) => {
@@ -18,7 +16,7 @@ export default CardItemCategory
 
 const styles = StyleSheet.create({
     container: {
-        backgroundColor: Colors.third,
+        backgroundColor: Colors.Beige,
         marginHorizontal: 15,
         marginVertical: 10,
         padding: 15,
@@ -27,6 +25,6 @@ const styles = StyleSheet.create({
         borderRadius: 7
     },
     text: {
-        color: Colors.fourth,
+        color: Colors.lightGray
     }
 })
