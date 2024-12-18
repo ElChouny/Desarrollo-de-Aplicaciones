@@ -2,6 +2,7 @@ import { StyleSheet, Text, View, FlatList, Pressable } from "react-native";
 import cart from '../data/cart.json';
 import CardCartProduct from '../components/CardCartProduct';
 import Colors from '../globals/Colors'
+import Counter from '../components/Counter'
 
 const Cart = () => {
     return (
@@ -43,7 +44,7 @@ const styles = StyleSheet.create({
         fontSize: 16
     },
     button: {
-        backgroundColor: Colors.primary,
+        backgroundColor: Colors.Beige,
         padding: 10,
         borderRadius: 5
     },
