@@ -12,11 +12,12 @@ const Counter = () => {
 
     return (
         <View>
-            <Button title='-' onPress={() => dispach(decrement())} />
+            <Button title= '-' onPress={()=>dispach(decrement())}/>
             <Text>{counter}</Text>
-            <Button title='+' onPress={() => dispach(increment())} />
-            <TextInput value={input} onChangeText={(t) => setInput(parseInt(t))} />
-            <Button title='cambiar' onPress={() => dispach(incrementByAmount(input))} />
+            <Button title= '+' onPress={()=>dispach(increment())}/>
+            <TextInput value={input} onChangeText={(t)=>setInput(parseInt(t))}/>
+            <Button title= 'cambiar' onPress={()=>dispach(incrementByAmount (input))}/>
+
         </View>
     )
 }

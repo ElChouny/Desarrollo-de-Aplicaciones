@@ -44,7 +44,7 @@ const styles = StyleSheet.create({
         fontSize: 16
     },
     button: {
-        backgroundColor: Colors.Beige,
+        backgroundColor: Colors.Arena,
         padding: 10,
         borderRadius: 5
     },

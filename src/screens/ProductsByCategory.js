@@ -1,5 +1,4 @@
-import { FlatList, Pressable, StyleSheet, Text, View, useWindowDimensions } from 'react-native'
-import products from '../data/products.json'
+import { FlatList, StyleSheet, View } from 'react-native'
 import { useEffect, useState } from 'react'
 import Search from '../components/Search'
 import CardProduct from '../components/CardProduct'
@@ -13,10 +12,9 @@ const ProductsByCategory = () => {
 
 
     useEffect(() => {
-
         setProducts(productsFilteredByCategory.filter(product => product.title.includes(keyword)))
-
-    }, [keyword])
+    },
+        [keyword])
 
 
 
