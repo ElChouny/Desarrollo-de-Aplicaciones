@@ -4,7 +4,7 @@ import { useFonts } from 'expo-font'
 import Fonts from './src/globals/Fonts'
 import Navigator from './src/navigation/Navigator'
 import { Provider } from 'react-redux'
-import store from './src/store'
+import {store} from './src/store'
 
 export default function App() {
 
